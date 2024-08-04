@@ -11,22 +11,27 @@ interface Props {
 const QuestionPage: React.FC<Props> = ({ }) => {
     const [user] = React.useState(new User(questions.map(q => q.category)));
     const [currentPage, setCurrentPage] = React.useState(0);
-    const [currentAnswer, setCurrentAnswer] = React.useState<boolean | null>(null);
+    const [answers, setAnswers] = React.useState<(boolean | null)[]>(new Array(questions.length).fill(null));
 
-    // Function to move to the next question or submit if it's the last question
+    // Handle clicking on the Yes/No buttons
+    const handleAnswer = (answer: boolean) => {
+        const updatedAnswers = [...answers];
+        updatedAnswers[currentPage] = answer;
+        setAnswers(updatedAnswers);
+        user.answerQuestion(questions[currentPage].category, answer);
+        console.log(answers, "HEEH")
+    };
+
+    // Navigate to the next question
     const handleNext = () => {
-        if (currentAnswer !== null) { // Ensure that an answer has been given
-            user.answerQuestion(questions[currentPage].category, currentAnswer);
-            if (currentPage < questions.length - 1) {
-                setCurrentPage(currentPage + 1);
-                setCurrentAnswer(null); // Reset answer for the next question
-            } else {
-                console.log(user.scores); // Final scoring
-            }
+        if (currentPage < questions.length - 1) {
+            setCurrentPage(currentPage + 1);
+        } else {
+            console.log(user.scores); // Final scoring
         }
     };
 
-    // Function to move back to the previous question
+    // Navigate back to the previous question
     const handleBack = () => {
         if (currentPage > 0) {
             setCurrentPage(currentPage - 1);
@@ -37,8 +42,8 @@ const QuestionPage: React.FC<Props> = ({ }) => {
         <div className='text-3xl balsamiq-sans-regular max-w-screen-xl w-full flex flex-col gap-20 items-center'>
             <h1 className='min-h-28'>{questions[currentPage].text}</h1>
             <div className='w-full flex flex-row items-center justify-center gap-5'>
-                <Button text="Yes" onClick={() => setCurrentAnswer(true)} selected={currentAnswer === true} />
-                <Button text="No" onClick={() => setCurrentAnswer(false)} selected={currentAnswer === false} />
+                <Button text="Yes" onClick={() => handleAnswer(true)} selected={answers[currentPage] === true} />
+                <Button text="No" onClick={() => handleAnswer(false)} selected={answers[currentPage] === false} />
             </div>
             <div className='mt-20 w-full flex items-center justify-center gap-10 text-purple-600'>
                 {currentPage > 0 && <button onClick={handleBack}>
