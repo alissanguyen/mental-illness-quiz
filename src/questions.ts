@@ -1,3 +1,17 @@
+import AnxietyBadge from "../public/assets/badges/Anxiety.png"; 
+import ADHDBadge from "../public/assets/badges/ADHD.png";
+import AntisocialBadge from "../public/assets/badges/Antisocial.png";
+import AutismBadge from "../public/assets/badges/autism.png";
+import BipolarBadge from "../public/assets/badges/Bipolar.png";
+import BPDBadge from "../public/assets/badges/BPD.png";
+import CPTSDBadge from "../public/assets/badges/CPTSD.png";
+import DepressionBadge from "../public/assets/badges/Depression.png";
+import OCDBadge from "../public/assets/badges/OCD.png";
+import EatingDisorderBadge from "../public/assets/badges/EatingDisorder.png";
+import NarcissisticBadge from "../public/assets/badges/Narcissistic.png";
+import SchizophreniaBadge from "../public/assets/badges/schizophrenia.png";
+import SubstanceBadge from "../public/assets/badges/substance.png";  
+
 export const questions = [
   {
     id: 1,
@@ -262,3 +276,20 @@ export const questions = [
 ];
 
 export type Question = (typeof questions)[number];
+
+
+export const categoriesWithDetails = [
+  { id: "anxiety", category: "Anxiety", badge: AnxietyBadge },
+  { id: "bipolar", category: "Bipolar", badge: BipolarBadge },
+  { id: "borderline_personality_disorder", category: "Borderline Personality Disorder", badge: BPDBadge },
+  { id: "narcissistic", category: "Narcissistic", badge: NarcissisticBadge },
+  { id: "antisocial", category: "Antisocial", badge: AntisocialBadge },
+  { id: "ocd", category: "Obsessive-Compulsive Disorder", badge: OCDBadge },
+  { id: "cptsd", category: "Complex Post-Traumatic Stress Disorder", badge: CPTSDBadge },
+  { id: "schizophrenia", category: "Schizophrenia", badge: SchizophreniaBadge },
+  { id: "eating_disorder", category: "Eating Disorder", badge: EatingDisorderBadge },
+  { id: "adhd_add", category: "ADHD/ADD", badge: ADHDBadge },
+  { id: "autism", category: "Autism", badge: AutismBadge },
+  { id: "substance_use_disorder", category: "Substance Use Disorder", badge: SubstanceBadge },
+  { id: "depression", category: "Depression", badge: DepressionBadge }
+];
